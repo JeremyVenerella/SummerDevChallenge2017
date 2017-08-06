@@ -22,7 +22,7 @@ void Renderer::init(const char * title, int x, int y, int width, int height)
 
 	if (_window == nullptr)
 	{
-		_log.write("SDL Window failed to create", _log.FatalError);
+		Log::write("SDL Window failed to create", Log::FatalError);
 		SDL_Quit();
 		exit(1);
 	}
@@ -30,20 +30,23 @@ void Renderer::init(const char * title, int x, int y, int width, int height)
 	SDL_GLContext glContex = SDL_GL_CreateContext(_window);
 	if (glContex == nullptr)
 	{
-		_log.write(SDL_GetError(), _log.FatalError);
-		SDL_Quit();
-		exit(1);
+		Log::write(SDL_GetError(), Log::FatalError);
+
 	}
 
 	GLenum glError = glewInit();
 	if (glError != GLEW_OK)
 	{
-		_log.write("GLEW failed to INIT", _log.FatalError);
+		Log::write("GLEW failed to INIT", Log::FatalError);
 	}
 
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
 	glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+
+	//compile shaders
+	_colorShaders.run("Shaders/colorShading.vert", "Shaders/colorShading.frag");
+	_colorShaders.addAttrib("vertPos");
+	_colorShaders.linkShader();
 
 	_isRunning = true;
 }
@@ -78,13 +81,9 @@ void Renderer::draw()
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glEnableClientState(GL_COLOR_ARRAY);
-	glBegin(GL_TRIANGLES);
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glVertex2f(0, 0);
-	glVertex2f(0, 300);
-	glVertex2f(300, 300);
-	glEnd();
+	_colorShaders.use();
+	_sprite.draw();
+	_colorShaders.unuse();
 
 	SDL_GL_SwapWindow(_window);
 }

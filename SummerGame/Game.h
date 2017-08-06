@@ -1,6 +1,7 @@
 #pragma once
 #include "SDL.h"
 #include "Renderer.h"
+#include "Sprite.h"
 
 class Game
 {
@@ -15,5 +16,6 @@ public:
 
 private:
 	Renderer *_renderer = new Renderer();
+	Sprite _sprite;
 };
 

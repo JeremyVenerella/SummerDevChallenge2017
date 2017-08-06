@@ -1,5 +1,5 @@
 #include "Log.h"
-
+#include "SDL.h"
 
 
 Log::Log()
@@ -15,8 +15,10 @@ void Log::write(const char * error, logLevel level)
 {
 	int temp;
 	std::cout << "[" << levelStr(level) << "] " << error << std::endl;
+	SDL_Quit();
 	std::cin >> temp;
 	--temp;
+	exit(1);
 }
 
 char * Log::levelStr(logLevel level)

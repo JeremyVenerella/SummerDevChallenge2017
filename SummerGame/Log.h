@@ -10,8 +10,8 @@ public:
 	Log();
 	~Log();
 
-	void write(const char *error, logLevel level);
-	char* levelStr(logLevel level);
+	static void write(const char *error, logLevel level);
+	static char* levelStr(logLevel level);
 
 };
 
