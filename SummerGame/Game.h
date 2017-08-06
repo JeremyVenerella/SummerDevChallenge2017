@@ -10,9 +10,10 @@ public:
 
 	void gameInit(const char * gameTitle);
 	void update();
+	void loop();
 	bool running();
 
 private:
-	Renderer *renderer = new Renderer();
+	Renderer *_renderer = new Renderer();
 };
 

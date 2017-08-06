@@ -1,5 +1,7 @@
 #pragma once
 #include "SDL.h"
+#include "GL/glew.h"
+#include "Log.h"
 
 class Renderer
 {
@@ -12,11 +14,13 @@ public:
 	void handleEvents();
 	void clean();
 	bool running();
+	void draw();
 	
 private:
-	SDL_Window *window;
-	SDL_Renderer *renderer;
-	bool fullScreen = false;
-	bool isRunning;
+	SDL_Window *_window;
+	SDL_Renderer *_renderer;
+	bool _fullScreen = false;
+	bool _isRunning;
+	Log _log;
 };
 

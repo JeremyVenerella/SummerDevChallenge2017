@@ -8,22 +8,33 @@ Game::Game()
 
 Game::~Game()
 {
-	renderer->clean();
+
 }
 
 void Game::gameInit(const char * gameTitle)
 {
 	
-	renderer->init(gameTitle, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600);
+	_renderer->init(gameTitle, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600);
+	loop();
+
 }
 
 void Game::update()
 {
-	renderer->handleEvents();
-	renderer->render();
+	_renderer->handleEvents();
+	_renderer->draw();
+}
+
+void Game::loop()
+{
+	while (running())
+	{
+		update();
+	}
+	_renderer->clean();
 }
 
 bool Game::running()
 {
-	return renderer->running();
+	return _renderer->running();
 }
