@@ -21,6 +21,17 @@ void Log::write(const char * error, logLevel level)
 	exit(1);
 }
 
+void Log::write(std::string error, logLevel level)
+
+{
+	int temp;
+	std::cout << "[" << levelStr(level) << "] " << error << std::endl;
+	SDL_Quit();
+	std::cin >> temp;
+	--temp;
+	exit(1);
+}
+
 char * Log::levelStr(logLevel level)
 {
 	char *ErrorTypes[] =

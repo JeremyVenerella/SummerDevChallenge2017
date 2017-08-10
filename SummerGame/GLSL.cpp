@@ -135,3 +135,11 @@ void GLSL::unuse()
 		glDisableVertexAttribArray(i);
 	}
 }
+
+GLint GLSL::getUniformLocation(const std::string & name)
+{
+	GLint uLoc = glGetUniformLocation(_programID, name.c_str());
+	if (uLoc == GL_INVALID_INDEX)
+		Log::write(name.c_str(), Log::FatalError);
+	return uLoc;
+}

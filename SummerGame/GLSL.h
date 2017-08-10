@@ -14,6 +14,7 @@ public:
 	void addAttrib(const std::string& attribName);
 	void use();
 	void unuse();
+	GLint getUniformLocation(const std::string& name);
 
 private:
 	GLuint _programID;

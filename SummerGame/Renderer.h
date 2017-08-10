@@ -4,6 +4,8 @@
 #include "Log.h"
 #include "Sprite.h"
 #include "GLSL.h"
+#include "OGLTexture.h"
+#include "FileManager.h"
 
 class Renderer
 {
@@ -17,6 +19,8 @@ public:
 	void clean();
 	bool running();
 	void draw();
+	float getTime() { return _time; };
+	void timeStep() { _time += 0.01f; };
 
 	Sprite _sprite;
 	
@@ -26,5 +30,7 @@ private:
 	bool _fullScreen = false;
 	bool _isRunning;
 	GLSL _colorShaders;
+	float _time;
+	OGLTexture _pTexture;
 };
 

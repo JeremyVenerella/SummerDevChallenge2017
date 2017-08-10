@@ -46,7 +46,12 @@ void Renderer::init(const char * title, int x, int y, int width, int height)
 	//compile shaders
 	_colorShaders.run("Shaders/colorShading.vert", "Shaders/colorShading.frag");
 	_colorShaders.addAttrib("vertPos");
+	_colorShaders.addAttrib("vertexColor");
+	_colorShaders.addAttrib("vertexUV");
 	_colorShaders.linkShader();
+
+	//TODO: REMOVE 
+	_pTexture = FileManager::loadPNG("Assets/astronaut_S.png");
 
 	_isRunning = true;
 }
@@ -82,7 +87,17 @@ void Renderer::draw()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	_colorShaders.use();
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, _pTexture.id);
+	GLint textureLocation = _colorShaders.getUniformLocation("samp2d");
+	glUniform1i(textureLocation, 0);
+
+	//GLint timeLoc = _colorShaders.getUniformLocation("time");
+	//glUniform1f(timeLoc, _time);
+
 	_sprite.draw();
+
+	glBindTexture(GL_TEXTURE_2D, 0);
 	_colorShaders.unuse();
 
 	SDL_GL_SwapWindow(_window);
