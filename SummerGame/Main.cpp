@@ -4,6 +4,7 @@ int main(int argc, char* argv[])
 {
 	Game game;
 	game.gameInit("Summer Game");
-
+	int in;
+	std::cin >> in;
 	return 0;
 }

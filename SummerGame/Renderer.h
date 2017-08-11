@@ -5,7 +5,7 @@
 #include "Sprite.h"
 #include "GLSL.h"
 #include "OGLTexture.h"
-#include "FileManager.h"
+#include <vector>
 
 class Renderer
 {
@@ -19,18 +19,21 @@ public:
 	void clean();
 	bool running();
 	void draw();
+	void addSprite(float x, float y, float width, float height, std::string tPath);
 	float getTime() { return _time; };
 	void timeStep() { _time += 0.01f; };
-
-	Sprite _sprite;
+	float fps();
 	
 private:
+	char* _glVersion;
 	SDL_Window *_window;
 	SDL_Renderer *_renderer;
 	bool _fullScreen = false;
 	bool _isRunning;
 	GLSL _colorShaders;
 	float _time;
-	OGLTexture _pTexture;
+	float _fps;
+	float _frameTime;
+	std::vector<Sprite*> _sprites;
 };
 

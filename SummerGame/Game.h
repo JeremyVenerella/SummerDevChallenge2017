@@ -16,6 +16,7 @@ public:
 
 private:
 	Renderer *_renderer = new Renderer();
-	Sprite _sprite;
+	float _maxFps;
+	//Sprite _sprite;
 };
 

@@ -6,7 +6,7 @@ class Log
 public:
 	enum logLevel
 	{
-		Warning, Error, FatalError
+		Warning, Error, FatalError, Info
 	};
 	Log();
 	~Log();
